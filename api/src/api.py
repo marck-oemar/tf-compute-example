@@ -1,4 +1,5 @@
 from flask import Flask
+from flask_swagger_ui import get_swaggerui_blueprint
 from flask import request, jsonify
 from flask_cors import CORS
 from pprint import pprint
@@ -16,6 +17,20 @@ description:
 def create_api(tf_cwd):
     api = Flask(__name__)
     CORS(api)
+
+    ### swagger specific ###
+    SWAGGER_URL = '/swagger'
+    API_URL = '/static/swagger.json'
+    SWAGGERUI_BLUEPRINT = get_swaggerui_blueprint(
+        SWAGGER_URL,
+        API_URL,
+        config={
+            'app_name': "tf-compute-crud-example"
+        }
+    )
+    api.register_blueprint(SWAGGERUI_BLUEPRINT, url_prefix=SWAGGER_URL)
+    ### end swagger specific ###
+
 
     @api.route('/', methods=['GET'])
     def home():

@@ -65,6 +65,10 @@ The API structure for now is simply:
 /api/ec2instance/<id> DELETE
 ```
 
+#### Explore the API Documentation with Swagger UI
+The best way to build against an API is by exploring it. The API has Swagger UI enabled. 
+Browser to http://0.0.0.0:8080/swagger for the API documentation.
+
 Example usage:
 
 ```

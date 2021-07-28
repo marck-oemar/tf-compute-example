@@ -1,0 +1,38 @@
+openapi: 3.0.1
+info:
+  title: tf-compute-crud
+  description: tf-compute-crud
+  version: '0.1'
+servers:
+  - url: 'http://localhost:8080'
+paths:
+  /api/ec2instance:
+    post:
+      description: Create a new ec2instance
+      responses:
+        '201':
+          description: Succesful
+      servers:
+        - url: 'http://localhost:8080'
+    servers:
+      - url: 'http://localhost:8080'
+
+  /api/ec2instance/{id}:
+    delete:
+      description: deletes an ec2instance based on id
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: The ID of the ec2instance
+          schema:
+            type: string
+      responses:
+        '500':
+          description: Error
+        '201':
+          description: Success
+      servers:
+        - url: 'http://localhost:8080'
+    servers:
+      - url: 'http://localhost:8080'
