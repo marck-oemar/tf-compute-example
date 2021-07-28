@@ -16,6 +16,21 @@ This allows us to execute concurrent operations against a Terraform config, sinc
 If the workspace already exists and contains resources, it will fail.
 that way we are always creating unique objects/stacks.
 
+Example result:
+
+```
+Apply complete! Resources: 7 added, 0 changed, 0 destroyed.
+
+Outputs:
+
+private_ips = [
+  [
+    "a.b.c.d",
+  ],
+]
+resource_id = "ecwz8j"
+```
+
 ### Delete
 'delete_resource.sh <resource id>' will delete the stack based on resource id. 
 It will also delete the terraform workspace.
