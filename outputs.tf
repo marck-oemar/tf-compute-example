@@ -1,8 +1,7 @@
-
 output "resource_id" {
-  value = var.env
+  value = module.compute-example.resource_id
 }
 
 output "private_ips" {
-  value = aws_instance.testvm.*.private_ip
+  value = module.compute-example.*.private_ips
 }

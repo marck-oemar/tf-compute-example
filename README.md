@@ -1,11 +1,12 @@
 # Terraform Compute provision Example 
-This repo is an example on how to manipulate infrastructure resources managed by Terrafor, from a CRUD perspective, specifically Create and Destroy. 
+This repo is an example on how to manipulate infrastructure resources managed by Terraform, from a CRUD perspective, specifically Create and Destroy. 
 This in itself is a challenge since Terraform is declarative.
 
-The Terraform config is a simple AWS EC2 stack, with a S3 remote state backend.
+The Terraform config sources a Terraform module in ./module-ec2-instance which is a simple AWS EC2 stack.
+Also a S3 remote state backend is configured.
 
 ## Multiple instances of a single Terraform config
-In order to manage multiple instances of a single Terraform config, we can utilize Terraform workspaces, where every workspace represents a unique state(file).
+In order to manage multiple instances of a single Terraform config, we can utilize Terraform workspaces (https://www.terraform.io/docs/language/state/workspaces.html), where every workspace represents a unique state(file).
 This allows us to execute concurrent operations against a Terraform config, since every operation should relate to a unique workspace.
 
 ## CRUD operations
