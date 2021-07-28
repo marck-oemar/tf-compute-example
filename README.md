@@ -50,6 +50,26 @@ docker run \
 -p 8080:8080 tfcomputeexample:latest 
 ```
 
+### REST API
+The API is merely a concept:
+- the requests are synchronize. Refactor to asynchronize shouldn't be much work
+- The resource names are according to the REST API Guidelines
+- CRUD REST HTTP operations are implemented, instead of misusing resources names for operations.
+- The return object of a request is a string. TODO: return proper json object.
 
 
+The API structure for now is simply:
+/api/ec2instance POST
+/api/ec2instance/<id> DELETE
 
+Example usage:
+
+```
+curl http://0.0.0.0:8080/api/ec2instance -X POST
+curl http://0.0.0.0:8080/api/ec2resource/3fvvse -X DELETE
+```
+
+#### Workload management
+Every operation forks a subprocess. This is not production grade!
+Improvement: create a backend microservice that is solely responsible for executing terraform and is scalable.
+Message queuing could be helpful.
