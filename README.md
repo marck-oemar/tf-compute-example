@@ -73,6 +73,6 @@ curl http://0.0.0.0:8080/api/ec2resource/3fvvse -X DELETE
 ```
 
 #### Workload management
-Every operation forks a subprocess. This is not production grade!
-Improvement: create a backend microservice that is solely responsible for executing terraform and is scalable.
-Message queuing could be helpful.
+- Every operation forks a subprocess. This is not production grade!
+- Improvement: create a backend microservice that is solely responsible for executing terraform and is scalable.
+- Message queuing could be helpful.
