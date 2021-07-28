@@ -28,3 +28,5 @@ yarn.lock
 .yarn-integrity
 
 .terraform.lock.hcl 
+
+__pycache__
