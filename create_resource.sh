@@ -18,4 +18,4 @@ else
   terraform workspace new ${TERRAFORM_WORKSPACE}
 fi
 
-TF_VAR_env="${TFENV}" TF_VAR_node_count="1" terraform apply -auto-approve
+TF_VAR_env="${TFENV}" terraform apply -auto-approve

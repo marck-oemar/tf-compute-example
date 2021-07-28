@@ -15,6 +15,6 @@ else
   exit 1
 fi
 
-TF_VAR_env="${TFENV}" TF_VAR_node_count="1" terraform destroy -auto-approve
+TF_VAR_env="${TFENV}" terraform destroy -auto-approve
 terraform workspace select default
 terraform workspace delete ${TERRAFORM_WORKSPACE}
