@@ -59,8 +59,11 @@ The API is merely a concept:
 
 
 The API structure for now is simply:
+
+```
 /api/ec2instance POST
 /api/ec2instance/<id> DELETE
+```
 
 Example usage:
 
