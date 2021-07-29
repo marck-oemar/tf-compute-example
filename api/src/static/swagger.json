@@ -10,6 +10,8 @@ paths:
     post:
       description: Create a new ec2instance
       responses:
+        '500':
+          description: Error      
         '201':
           description: Succesful
       servers:
@@ -30,7 +32,7 @@ paths:
       responses:
         '500':
           description: Error
-        '201':
+        '200':
           description: Success
       servers:
         - url: 'http://localhost:8080'

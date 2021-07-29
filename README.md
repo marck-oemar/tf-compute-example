@@ -55,7 +55,6 @@ The API is merely a concept:
 - the requests are synchronize. Refactor to asynchronize shouldn't be much work
 - The resource names are according to the REST API Guidelines
 - CRUD REST HTTP operations are implemented, instead of misusing resources names for operations.
-- The return object of a request is a string. TODO: return proper json object.
 
 
 The API structure for now is simply:

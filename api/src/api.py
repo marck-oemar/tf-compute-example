@@ -31,7 +31,6 @@ def create_api(tf_cwd):
     api.register_blueprint(SWAGGERUI_BLUEPRINT, url_prefix=SWAGGER_URL)
     ### end swagger specific ###
 
-
     @api.route('/', methods=['GET'])
     def home():
         return "<h1>Nothing to see here</h1><p>Nothing to see here</p>"
@@ -45,6 +44,7 @@ def create_api(tf_cwd):
             process = subprocess.Popen(
                 cmd, shell=True, executable='/bin/bash', cwd=tf_cwd, stdout=subprocess.PIPE)
             piped_output = ''
+            resource_id_line = ''
             while True:
                 line = process.stdout.readline()
                 if not line:
@@ -52,15 +52,24 @@ def create_api(tf_cwd):
                 line_stripped = line.decode('utf8', errors='strict').strip()
                 print(line_stripped)
                 piped_output += line_stripped + "\n"
+                if line_stripped is not None and 'resource_id' in line_stripped:
+                    resource_id_line = line_stripped
 
             process.wait()
             if process.returncode == 0:
-                return piped_output + "Resource" + " created succesfully \n", 201
+                message = {
+                    'message': "Resource" + " created succesfully \n",
+                    'resource_id': resource_id_line
+                }
+                return message, 201
             else:
-                return piped_output + "Resource" + " created unsuccesfully \n", 500
+                message = {
+                    'message': "Resource" + " created unsuccesfully \n",
+                }
+                return message, 500
 
-        except:
-            return "Unable to execute Terraform", 500
+        except Exception:
+            return {'message': "Unable to execute Terraform"}, 500
 
     @api.route('/api/ec2instance/<id>', methods=['DELETE'])
     def delete_ec2instance_by_id(id):
@@ -81,12 +90,18 @@ def create_api(tf_cwd):
 
             process.wait()
             if process.returncode == 0:
-                return piped_output + "Resource:" + id + " deleted succesfully \n", 201
+                message = {
+                    'message': "Resource" + " deleted succesfully \n",
+                }
+                return message, 200
             else:
-                return piped_output + "Resource:" + id + " deleted unsuccesfully \n", 500
+                message = {
+                    'message': "Resource" + " deleted unsuccesfully \n",
+                }
+                return message, 500
 
-        except:
-            return "Unable to execute Terraform", 500
+        except Exception:
+            return {'message': "Unable to execute Terraform"}, 500
 
     return api
 
