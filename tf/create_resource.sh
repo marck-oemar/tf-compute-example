@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 echo "generating random resource id"
 RESOURCE_ID=$(tr -dc a-z0-9 </dev/urandom | head -c 6)
