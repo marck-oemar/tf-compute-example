@@ -7,7 +7,7 @@ TFENV=${RESOURCE_ID}
 
 terraform init
 
-if [[ $(terraform workspace list | grep "\s${TERRAFORM_WORKSPACE}$") ]]; then
+if [[ "$(terraform workspace list | grep "\s${TERRAFORM_WORKSPACE}$")" ]]; then
   echo "Selecting the workspace..."
   terraform workspace select ${TERRAFORM_WORKSPACE}
 else
