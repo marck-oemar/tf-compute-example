@@ -1,4 +1,7 @@
 #!/bin/sh
+# NonZero exit error messages:
+#  - error:ExistingWorkspaceContainsResources
+
 set -x 
 
 echo "generating random resource id"
@@ -20,7 +23,11 @@ terraform init
 if [ $(terraform workspace list | grep "\s${TERRAFORM_WORKSPACE}$") ]; then
   echo "Selecting the workspace..."
   terraform workspace select ${TERRAFORM_WORKSPACE}
-  if ! [ -z $(terraform state list) ] ; then echo "this terraform workspace already contains infra resources. Cannot create already existing resource" ; exit 1 ; fi
+  if ! [ -z $(terraform state list) ] ; then 
+    echo "error:ExistingWorkspaceContainsResources"
+    echo "this terraform workspace already contains infra resources. Cannot create already existing resource"
+    exit 1
+  fi
 else
   echo "Creating new workspace..."
   terraform workspace new ${TERRAFORM_WORKSPACE}

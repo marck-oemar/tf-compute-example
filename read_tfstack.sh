@@ -1,7 +1,14 @@
 #!/bin/sh
 set -x 
+# NonZero exit error messages:
+#  - error:IdNotSpecified
+#  - error:WorkspaceNotExist
 
-if [ -z "$1" ] ; then echo "no resource id given" ; exit 1 ; fi 
+if [ -z "$1" ] ; then
+  echo "error:IdNotSpecified"
+  echo "no resource id given"
+  exit 1
+fi 
 RESOURCE_ID="$1"
 TERRAFORM_WORKSPACE=${RESOURCE_ID}
 TFENV=${RESOURCE_ID}
@@ -19,7 +26,8 @@ if [ "$(terraform workspace list | grep "\s${TERRAFORM_WORKSPACE}$")" ]; then
   echo "Selecting the workspace..."
   terraform workspace select ${TERRAFORM_WORKSPACE}
 else
-  echo "Workspace based on stack id $1 does not exist, cannot continue"
+  echo "error:WorkspaceNotExist"
+  echo "workspace based on stack id $1 does not exist, cannot continue"
   exit 1
 fi
 
