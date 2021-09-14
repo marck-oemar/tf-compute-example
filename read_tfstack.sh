@@ -1,5 +1,5 @@
 #!/bin/sh
-set -x 
+#set -x 
 # NonZero exit error messages:
 #  - error:IdNotSpecified
 #  - error:WorkspaceNotExist
@@ -31,12 +31,9 @@ else
   exit 1
 fi
 
-list=$(terraform state list)
-for i in ${list}; do
-  echo ""
-  echo "=========== $i ============"
-  terraform state show $i
-done
+
+terraform output -json
+
 terraform workspace select default
 
 # allow for concurrent tf run with temp directory
